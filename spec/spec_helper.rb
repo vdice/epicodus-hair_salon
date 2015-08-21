@@ -11,6 +11,10 @@ RSpec.configure do |config|
     DB.exec("DELETE FROM clients *;")
     DB.exec("DELETE FROM stylists *;")
 
+    # Verify DB state
+    expect(Client.all()).to(eq([]))
+    expect(Stylist.all()).to(eq([]))
+
     # Initialize test instances
     @stylist = Stylist.new({:name => 'Alexander', :id => nil})
     @client = Client.new({:name => 'Bucephalus', :stylist => @stylist, :id => nil})
