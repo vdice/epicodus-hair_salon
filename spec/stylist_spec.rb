@@ -12,4 +12,10 @@ describe(Stylist) do
       expect(@stylist.id()).to(be_an_instance_of(Fixnum))
     end
   end
+
+  describe('.find') do
+    it('returns the stylist based on id') do
+      expect(Stylist.find(@stylist.id())).to(eq(@stylist))
+    end
+  end
 end

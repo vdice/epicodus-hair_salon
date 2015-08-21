@@ -12,8 +12,8 @@ RSpec.configure do |config|
     DB.exec("DELETE FROM stylists *;")
 
     # Initialize test instances
-    @stylist = Stylist.new({:name => 'Alexander'})
-    @client = Client.new({:name => 'Bucephalus', :stylist => @stylist})
+    @stylist = Stylist.new({:name => 'Alexander', :id => nil})
+    @client = Client.new({:name => 'Bucephalus', :stylist => @stylist, :id => nil})
 
     # Save to DB
     @stylist.save()

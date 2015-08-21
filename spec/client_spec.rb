@@ -18,4 +18,10 @@ describe(Client) do
       expect(@client.stylist()).to(eq(@stylist))
     end
   end
+
+  describe('.all') do
+    it('returns all clients') do
+      expect(Client.all()).to(eq([@client]))
+    end
+  end
 end

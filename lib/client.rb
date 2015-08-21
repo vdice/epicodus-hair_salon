@@ -4,11 +4,27 @@ class Client
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
     @stylist = attributes.fetch(:stylist)
-    @id = nil
+    @id = attributes.fetch(:id)
   end
 
   define_method(:save) do
     result = DB.exec("INSERT INTO clients (name, stylist_id) VALUES ('#{@name}', #{@stylist.id()}) RETURNING id;")
     @id = result.first().fetch('id').to_i()
+  end
+
+  define_singleton_method(:all) do
+    results = DB.exec("SELECT * FROM clients;")
+    clients = []
+    results.each() do |result|
+      name = result.fetch('name')
+      id = result.fetch('id').to_i()
+      stylist = Stylist.find(result.fetch('stylist_id').to_i())
+      clients.push(Client.new({:name => name, :stylist => stylist, :id => id}))
+    end
+    clients
+  end
+
+  define_method(:==) do |other|
+    @id.eql?(other.id())
   end
 end
