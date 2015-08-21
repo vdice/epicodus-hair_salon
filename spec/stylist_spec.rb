@@ -1,6 +1,11 @@
 require('spec_helper')
 
 describe(Stylist) do
+  before() do
+    @stylist.save()
+    @client.save()
+  end
+
   describe('#name') do
     it('returns the name of the stylist') do
       expect(@stylist.name()).to(eq('Alexander'))
