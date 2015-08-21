@@ -20,25 +20,22 @@ describe('The Hair Salon Management App', {:type => :feature}) do
     describe('create, read, delete stylists') do
       before(:each) do
         @stylist.save()
+        visit('/stylists')
       end
 
       it('presents the user with a listing of all stylists') do
-        visit('/stylists')
         expect(page).to have_content(@stylist.name())
       end
       it('allows the user to visit a particular stylist page') do
-        visit('/stylists')
         click_link(@stylist.name())
         expect(page).to have_content("Manage clients for #{@stylist.name()}")
       end
       it('allows the user to add a new stylist') do
-        visit('/stylists')
         fill_in('name', :with => 'King Philip II')
         click_button('Add Stylist')
         expect(page).to have_content('King Philip II')
       end
       it('allows the user to remove a stylist') do
-        visit('/stylists')
         find('#stylist_select').find(:xpath, 'option[1]').select_option
         click_button('Remove Stylist')
         expect(page).to have_content('It looks like you don\'t have any stylists!')
@@ -66,15 +63,14 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       before(:each) do
         @stylist.save()
         @client.save()
+        visit('/clients')
       end
 
       it('presents the user with a listing of all clients, along with their stylists') do
-        visit('/clients')
         expect(page).to have_content(@client.name())
         expect(page).to have_content(@stylist.name())
       end
       it('allows the user to add a new client') do
-        visit('/clients')
         fill_in('name', :with => 'Balios')
         find('#stylist_select').find(:xpath, 'option[1]').select_option
         click_button('Add Client')
@@ -82,7 +78,6 @@ describe('The Hair Salon Management App', {:type => :feature}) do
         expect(page).to have_content(@stylist.name())
       end
       it('allows the user to remove a client') do
-        visit('/clients')
         find('#client_select').find(:xpath, 'option[1]').select_option
         click_button('Remove Client')
         expect(page).to have_content('It looks like you don\'t have any clients!')
@@ -90,10 +85,49 @@ describe('The Hair Salon Management App', {:type => :feature}) do
     end
   end
 
-  describe('the unique stylist path') do
-    it('allows the user to update a stylist') do
+  describe('the unique client path') do
+    before(:each) do
+      @stylist.save()
+      @client.save()
+      @client.update({:stylist => @stylist})
+      visit("/clients/#{@client.id()}")
+    end
+
+    it('greets the user with initial details') do
+      expect(page).to have_content("Manage details for #{@client.name()}")
+      expect(page).to have_content("Current Stylist is #{@client.stylist().name()}")
+    end
+
+    it('allows the user to change name and change stylist') do
+      # @alternate_stylist.save()
+      # fill_in('name', :with => @alternate_client.name())
+      # find('#client_select').find(:xpath, 'option[2]').select_option
+      # click_button('Update')
+      # expect(page).to have_content(@alternate_client.name())
+      # expect(page).to have_content(@alternate_stylist.name())
+    end
+    it('allows the user to change name only') do
 
     end
-    # TODO: add clients to stylist
+    it('allows the user to add clients only') do
+
+    end
+  end
+
+  describe('the unique stylist path') do
+    describe('initial state') do
+
+    end
+    describe('allows the user to update a stylist') do
+      it('can change name and add clients') do
+
+      end
+      it('can change name only') do
+
+      end
+      it('can add clients only') do
+
+      end
+    end
   end
 end

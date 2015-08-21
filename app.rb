@@ -43,8 +43,10 @@ end
 post('/clients') do
   name = params.fetch('name')
   stylist_id = params.fetch('stylist_select').to_i()
-  new_client = Client.new({:name => name, :stylist => Stylist.find(stylist_id), :id => nil})
+  stylist = Stylist.find(stylist_id)
+  new_client = Client.new({:name => name, :stylist => stylist, :id => nil})
   new_client.save()
+  new_client.update({:stylist => stylist})
 
   @stylists = Stylist.all()
   @clients = Client.all()
@@ -66,3 +68,7 @@ get('/stylists/:id') do
 end
 
 # Update Clients
+get('/clients/:id') do
+  @client = Client.find(params.fetch('id').to_i())
+  erb(:client)
+end

@@ -4,7 +4,8 @@
 <% if @clients.any?() %>
   <ul>
     <% @clients.each() do |client| %>
-      <li>Client: <%= client.name() %>, Stylist: <a href="/stylists/<%= client.stylist().id()%>"><%= client.stylist().name() %></a></li>
+      <li>Client: <a href="/clients/<%= client.id() %>"><%= client.name() %></a>,
+          Stylist: <a href="/stylists/<%= client.stylist().id()%>"><%= client.stylist().name() %></a></li>
     <% end %>
   </ul>
 <% else %>
@@ -13,9 +14,8 @@
   </p>
 <% end %>
 
-<br>
-
 <!-- CREATE -->
+<br>
 <label for="add-client-form">Add a New Client</label>
 <% if @stylists.any?() %>
   <form class="add-client-form" id="add-client-form" action="/clients" method="post">
@@ -39,6 +39,7 @@
 <% end %>
 
 <!-- DELETE -->
+<br>
 <% if @clients.any?() %>
 <label for="remove-client-form">Remove a Client</label>
   <form class="remove-client-form" id="remove-client-form" action="/clients" method="post">
@@ -54,3 +55,6 @@
     <button type="submit" class="btn btn-primary">Remove Client</button>
   </form>
 <% end %>
+
+<br><br>
+<a href="/" class="btn btn-success">Home</a>

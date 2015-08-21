@@ -25,6 +25,7 @@
 </form>
 
 <!-- DELETE -->
+<br>
 <% if @stylists.any?() %>
 <label for="remove-stylist-form">Remove a Stylist</label>
   <form class="remove-stylist-form" id="remove-stylist-form" action="/stylists" method="post">
@@ -40,3 +41,6 @@
     <button type="submit" class="btn btn-primary">Remove Stylist</button>
   </form>
 <% end %>
+
+<br><br>
+<a href="/" class="btn btn-success">Home</a>
