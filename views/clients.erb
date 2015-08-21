@@ -3,7 +3,7 @@
 <% if @clients.any?() %>
   <ul>
     <% @clients.each() do |client| %>
-      <li><a href="/clients/<%= client.id() %>"><%= client.name() %></a></li>
+      <li>Client: <%= client.name() %>, Stylist: <a href="/stylists/<%= client.stylist().id()%>"><%= client.stylist().name() %></a></li>
     <% end %>
   </ul>
 <% else %>

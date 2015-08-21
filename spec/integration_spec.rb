@@ -32,11 +32,12 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       expect(page).to have_content('Manage Clients')
       expect(page).to have_content('It looks like you don\'t have any clients!')
     end
-    it('presents the user with a listing of all stylists') do
+    it('presents the user with a listing of all clients, along with their stylists') do
       @stylist.save()
       @client.save()
       visit('/clients')
       expect(page).to have_content(@client.name())
+      expect(page).to have_content(@stylist.name())
     end
   end
 end
