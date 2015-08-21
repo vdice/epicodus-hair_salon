@@ -11,3 +11,13 @@
     It looks like you don't have any stylists!
   </p>
 <% end %>
+
+<br>
+<label for="add-stylist-form">Add a New Stylist</label>
+<form class="add-stylist-form" id="add-stylist-form" action="/stylists" method="post">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Add Stylist</button>
+</form>

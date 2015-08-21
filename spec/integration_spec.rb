@@ -23,6 +23,12 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       click_link(@stylist.name())
       expect(page).to have_content("Manage clients for #{@stylist.name()}")
     end
+    it('allows the user to add a new stylist') do
+      visit('/stylists')
+      fill_in('name', :with => 'King Philip II')
+      click_button('Add Stylist')
+      expect(page).to have_content('King Philip II')
+    end
   end
 
   describe('the client management path') do
