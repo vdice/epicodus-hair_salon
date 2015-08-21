@@ -5,7 +5,7 @@ require('pg')
 require('./lib/client')
 require('./lib/stylist')
 
-DB = PG.connect({:dbname => "hair_salon_test"})
+DB = PG.connect({:dbname => "hair_salon"})
 
 get('/') do
   erb(:index)
@@ -26,6 +26,18 @@ post('/stylists') do
 end
 
 get('/clients') do
+  @stylists = Stylist.all()
+  @clients = Client.all()
+  erb(:clients)
+end
+
+post('/clients') do
+  name = params.fetch('name')
+  stylist_id = params.fetch('stylist_select').to_i()
+  new_client = Client.new({:name => name, :stylist => Stylist.find(stylist_id), :id => nil})
+  new_client.save()
+
+  @stylists = Stylist.all()
   @clients = Client.all()
   erb(:clients)
 end

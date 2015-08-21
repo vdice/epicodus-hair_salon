@@ -45,5 +45,19 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       expect(page).to have_content(@client.name())
       expect(page).to have_content(@stylist.name())
     end
+    it('does not allow the user to add a client without a stylist') do
+      visit('/clients')
+      expect(page).to have_content('It looks like you don\'t have any clients!')
+      expect(page).to have_content('You\'ll have to Add a stylist before adding any clients!')
+    end
+    it('allows the user to add a new client') do
+      @stylist.save()
+      visit('/clients')
+      fill_in('name', :with => 'Balios')
+      find('#stylist_select').find(:xpath, 'option[1]').select_option
+      click_button('Add Client')
+      expect(page).to have_content('Balios')
+      expect(page).to have_content(@stylist.name())
+    end
   end
 end
