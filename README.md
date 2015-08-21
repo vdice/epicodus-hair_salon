@@ -15,6 +15,15 @@ view, add, update and delete clients and add clients to a stylist._
 * _Install necessary dependencies with: `bundle`_
 * _Run specs with: `rspec`_
 
+* _PostgreSQL database setup:_
+```
+psql
+CREATE DATABASE hair_salon;
+\c hair_salon
+CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int);
+CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);
+```
+
 ## Technologies Used
 
 _Ruby, rspec, Sinatra, Capybara, Heroku, Postgres_
