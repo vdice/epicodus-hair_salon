@@ -42,8 +42,11 @@ end
 
 post('/clients') do
   name = params.fetch('name')
-  stylist_id = params.fetch('stylist_select').to_i()
-  stylist = Stylist.find(stylist_id)
+  stylist = nil
+  if params.has_key?('stylist_select')
+    stylist_id = params.fetch('stylist_select').to_i()
+    stylist = Stylist.find(stylist_id)
+  end
   new_client = Client.new({:name => name, :stylist => stylist, :id => nil})
   new_client.save()
   new_client.update({:stylist => stylist})
@@ -90,7 +93,11 @@ patch('/clients/:id') do
   name = params.fetch('name')
   @client = Client.find(params.fetch('id').to_i())
 
-  stylist = Stylist.find(params.fetch('stylist_select').to_i())
+  stylist = nil
+  if params.has_key?('stylist_select')
+    stylist_id = params.fetch('stylist_select').to_i()
+    stylist = Stylist.find(stylist_id)
+  end
   @client.update({:name => name, :stylist => stylist})
 
   @stylists = Stylist.all()

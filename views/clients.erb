@@ -4,8 +4,11 @@
 <% if @clients.any?() %>
   <ul>
     <% @clients.each() do |client| %>
-      <li>Client: <a href="/clients/<%= client.id() %>"><%= client.name() %></a>,
-          Stylist: <a href="/stylists/<%= client.stylist().id()%>"><%= client.stylist().name() %></a></li>
+      <li>Client: <a href="/clients/<%= client.id() %>"><%= client.name() %></a>
+        <% unless client.stylist().nil? %>
+          , Stylist: <a href="/stylists/<%= client.stylist().id()%>"><%= client.stylist().name() %></a>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
@@ -39,8 +42,8 @@
 <% end %>
 
 <!-- DELETE -->
-<br>
 <% if @clients.any?() %>
+<br>
 <label for="remove-client-form">Remove a Client</label>
   <form class="remove-client-form" id="remove-client-form" action="/clients" method="post">
   <input type="hidden" name="_method" value="delete">

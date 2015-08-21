@@ -33,7 +33,7 @@ class Stylist
   end
 
   define_method(:==) do |other|
-    self.id().eql?(other.id())
+    other ? self.id().eql?(other.id()) : false
   end
 
   define_method(:update) do |new_attributes|

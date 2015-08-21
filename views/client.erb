@@ -1,6 +1,8 @@
 <h2>Manage details for <%= @client.name() %></h2>
 
-<h2>Current Stylist is <a href="/stylists/<%= @client.stylist().id() %>"><%= @client.stylist().name() %></a></h2>
+<% unless @client.stylist().nil? %>
+  <h2>Current Stylist is <a href="/stylists/<%= @client.stylist().id() %>"><%= @client.stylist().name() %></a></h2>
+<% end %>
 
 <!-- UPDATE -->
 <br>
@@ -11,12 +13,14 @@
     <label for="name">Client Name</label>
     <input type="text" name="name" id="name" class="form-control" value="<%= @client.name() %>">
 
-    <label for="stylist_select">Stylist</label>
-    <select id="stylist_select" name="stylist_select" type="text" class="form-control">
-      <% @stylists.each() do |stylist| %>
-        <option id="option_<%= stylist.name().gsub(/\s+/, "") %>" value="<%= stylist.id() %>"><%= stylist.name() %></option>
-      <% end %>
-    </select>
+    <% if @stylists.any?() %>
+      <label for="stylist_select">Stylist</label>
+      <select id="stylist_select" name="stylist_select" type="text" class="form-control">
+        <% @stylists.each() do |stylist| %>
+          <option id="option_<%= stylist.name().gsub(/\s+/, "") %>" value="<%= stylist.id() %>"><%= stylist.name() %></option>
+        <% end %>
+      </select>
+    <% end %>
   </div>
   <button type="submit" class="btn btn-primary">Update</button>
 </form>
