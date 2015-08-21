@@ -29,4 +29,22 @@ describe(Stylist) do
       expect(Stylist.all()).to(eq([@stylist]))
     end
   end
+
+  describe('#update') do
+    it('updates stylist name') do
+      @stylist.update({:name => @alternate_stylist.name()})
+      expect(@stylist.name()).to(eq(@alternate_stylist.name()))
+    end
+  end
+
+  describe('#delete') do
+    before() do
+      @alternate_stylist.save()
+    end
+
+    it('deletes a stylist') do
+      @stylist.delete()
+      expect(Stylist.all()).to(eq([@alternate_stylist]))
+    end
+  end
 end

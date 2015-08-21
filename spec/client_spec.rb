@@ -33,7 +33,6 @@ describe(Client) do
   describe('#update') do
     before() do
       @alternate_stylist.save()
-      @alternate_client.save()
     end
 
     it('updates client particulars') do
