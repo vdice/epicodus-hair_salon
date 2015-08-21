@@ -23,15 +23,17 @@ class Stylist
   end
 
   define_singleton_method(:find) do |id|
+    found_stylist = nil
     Stylist.all().each() do |stylist|
       if stylist.id().eql?(id)
-        return stylist
+        found_stylist = stylist
       end
     end
+    found_stylist
   end
 
   define_method(:==) do |other|
-    @id.eql?(other.id())
+    self.id().eql?(other.id())
   end
 
   define_method(:update) do |new_attributes|
@@ -45,6 +47,7 @@ class Stylist
 
   define_method(:delete) do
     DB.exec("DELETE FROM stylists WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET stylist_id = null WHERE stylist_id = #{@id}")
   end
 
   define_method(:clients) do

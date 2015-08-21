@@ -62,5 +62,10 @@ describe(Stylist) do
       @stylist.delete()
       expect(Stylist.all()).to(eq([@alternate_stylist]))
     end
+    it('removes any references to the removed stylist') do
+      @stylist.update({:client_ids => [@client.id()]})
+      @stylist.delete()
+      expect(Client.find(@client.id()).stylist()).to(be(nil))
+    end
   end
 end
