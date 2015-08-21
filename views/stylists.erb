@@ -27,7 +27,7 @@
 <!-- DELETE -->
 <br>
 <% if @stylists.any?() %>
-<label for="remove-stylist-form">Remove a Stylist</label>
+  <label for="remove-stylist-form">Remove a Stylist</label>
   <form class="remove-stylist-form" id="remove-stylist-form" action="/stylists" method="post">
   <input type="hidden" name="_method" value="delete">
     <div class="form-group">

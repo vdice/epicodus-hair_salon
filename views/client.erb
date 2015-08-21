@@ -1,3 +1,24 @@
 <h2>Manage details for <%= @client.name() %></h2>
 
 <h2>Current Stylist is <a href="/stylists/<%= @client.stylist().id() %>"><%= @client.stylist().name() %></a></h2>
+
+<br>
+<label for="update-client-form">Update Client Details</label>
+<form class="update-client-form" id="update-client-form" action="/clients/<%= @client.id() %>" method="post">
+<input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="name">Client Name</label>
+    <input type="text" name="name" id="name" class="form-control" value="<%= @client.name() %>">
+
+    <label for="stylist_select">Stylist</label>
+    <select id="stylist_select" name="stylist_select" type="text" class="form-control">
+      <% @stylists.each() do |stylist| %>
+        <option value="<%= stylist.id() %>"><%= stylist.name() %></option>
+      <% end %>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+<br><br>
+<a href="/clients" class="btn btn-success">Back</a>

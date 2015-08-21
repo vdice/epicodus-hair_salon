@@ -90,27 +90,38 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       @stylist.save()
       @client.save()
       @client.update({:stylist => @stylist})
-      visit("/clients/#{@client.id()}")
     end
 
     it('greets the user with initial details') do
+      visit("/clients/#{@client.id()}")
       expect(page).to have_content("Manage details for #{@client.name()}")
       expect(page).to have_content("Current Stylist is #{@client.stylist().name()}")
     end
 
-    it('allows the user to change name and change stylist') do
-      # @alternate_stylist.save()
-      # fill_in('name', :with => @alternate_client.name())
-      # find('#client_select').find(:xpath, 'option[2]').select_option
-      # click_button('Update')
-      # expect(page).to have_content(@alternate_client.name())
-      # expect(page).to have_content(@alternate_stylist.name())
-    end
-    it('allows the user to change name only') do
+    describe('allows the user to update client details') do
+      before(:each) do
+        @alternate_stylist.save()
+        visit("/clients/#{@client.id()}")
+      end
 
-    end
-    it('allows the user to add clients only') do
-
+      it('allows the user to change name and change stylist') do
+        fill_in('name', :with => @alternate_client.name())
+        find('#stylist_select').find(:xpath, 'option[2]').select_option
+        click_button('Update')
+        expect(page).to have_content(@alternate_client.name())
+        expect(page).to have_content(@alternate_stylist.name())
+      end
+      it('allows the user to change name only') do
+        find('#stylist_select').find(:xpath, 'option[2]').select_option
+        click_button('Update')
+        expect(page).to have_content(@client.name())
+        expect(page).to have_content(@alternate_stylist.name())
+      end
+      it('allows the user to add clients only') do
+        fill_in('name', :with => @alternate_client.name())
+        click_button('Update')
+        expect(page).to have_content(@alternate_client.name())
+        expect(page).to have_content(@stylist.name())      end
     end
   end
 
