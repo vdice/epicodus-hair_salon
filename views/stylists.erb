@@ -13,7 +13,7 @@
 <% end %>
 
 <br>
-<label for="add-stylist-form">Add a New Stylist</label>
+<label for="add-stylist-form">Add a Stylist</label>
 <form class="add-stylist-form" id="add-stylist-form" action="/stylists" method="post">
   <div class="form-group">
     <label for="name">Name</label>
@@ -21,3 +21,19 @@
   </div>
   <button type="submit" class="btn btn-primary">Add Stylist</button>
 </form>
+
+<% if @stylists.any?() %>
+<label for="remove-stylist-form">Remove a Stylist</label>
+  <form class="remove-stylist-form" id="remove-stylist-form" action="/stylists" method="post">
+  <input type="hidden" name="_method" value="delete">
+    <div class="form-group">
+      <label for="stylist_select">Stylist</label>
+      <select id="stylist_select" name="stylist_select" type="text" class="form-control">
+        <% @stylists.each() do |stylist| %>
+          <option value="<%= stylist.id() %>"><%= stylist.name() %></option>
+        <% end %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Remove Stylist</button>
+  </form>
+<% end %>
