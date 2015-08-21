@@ -1,1 +1,13 @@
 <h2>Manage Stylists</h2>
+
+<% if @stylists.any?() %>
+  <ul>
+    <% @stylists.each() do |stylist| %>
+      <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>
+    It looks like you don't have any stylists!
+  </p>
+<% end %>

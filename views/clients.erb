@@ -1,0 +1,13 @@
+<h2>Manage Clients</h2>
+
+<% if @clients.any?() %>
+  <ul>
+    <% @clients.each() do |client| %>
+      <li><a href="/clients/<%= client.id() %>"><%= client.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>
+    It looks like you don't have any clients!
+  </p>
+<% end %>
