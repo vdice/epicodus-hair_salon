@@ -120,16 +120,17 @@ describe('The Hair Salon Management App', {:type => :feature}) do
         expect(page).to have_content(@alternate_stylist.name())
       end
       it('allows the user to change name only') do
+        fill_in('name', :with => @alternate_client.name())
+        click_button('Update')
+        expect(page).to have_content(@alternate_client.name())
+        expect(page).to have_content(@stylist.name())
+      end
+      it('allows the user to add clients only') do
         find('#stylist_select').find(:xpath, 'option[2]').select_option
         click_button('Update')
         expect(page).to have_content(@client.name())
         expect(page).to have_content(@alternate_stylist.name())
-      end
-      it('allows the user to add clients only') do
-        fill_in('name', :with => @alternate_client.name())
-        click_button('Update')
-        expect(page).to have_content(@alternate_client.name())
-        expect(page).to have_content(@stylist.name())      end
+       end
     end
   end
 
@@ -152,31 +153,23 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       end
     end
 
-    # describe('allows the user to update stylist details') do
-    #   before(:each) do
-    #     @alternate_stylist.save()
-    #     visit("/stylists/#{@stylist.id()}")
-    #   end
-    #
-    #   it('allows the user to change name and change stylist') do
-    #     fill_in('name', :with => @alternate_stylist.name())
-    #     find('#stylist_select').find(:xpath, 'option[2]').select_option
-    #     click_button('Update')
-    #     expect(page).to have_content(@alternate_stylist.name())
-    #     expect(page).to have_content(@alternate_stylist.name())
-    #   end
-    #   it('allows the user to change name only') do
-    #     find('#stylist_select').find(:xpath, 'option[2]').select_option
-    #     click_button('Update')
-    #     expect(page).to have_content(@stylist.name())
-    #     expect(page).to have_content(@alternate_stylist.name())
-    #   end
-    #   it('allows the user to add stylists only') do
-    #     fill_in('name', :with => @alternate_client.name())
-    #     click_button('Update')
-    #     expect(page).to have_content(@alternate_client.name())
-    #     expect(page).to have_content(@stylist.name())
-    #   end
-    # end
+    describe('allows the user to update stylist details') do
+      before(:each) do
+        @alternate_stylist.save()
+        visit("/stylists/#{@stylist.id()}")
+      end
+
+      it('allows the user to change name and add clients') do
+
+      end
+      it('allows the user to change name only') do
+        fill_in('name', :with => @alternate_stylist.name())
+        click_button('Update')
+        expect(page).to have_content(@alternate_stylist.name())
+      end
+      it('allows the user to add clients only') do
+
+      end
+    end
   end
 end

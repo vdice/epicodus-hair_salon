@@ -61,24 +61,29 @@ delete('/clients') do
   erb(:clients)
 end
 
-# View Stylist
+# View and Update Stylist
 get('/stylists/:id') do
   @clients = Client.all()
   @stylist = Stylist.find(params.fetch('id').to_i())
   erb(:stylist)
 end
 
-# Update Stylist
-# TODO
+patch('/stylists/:id') do
+  @clients = Client.all()
+  name = params.fetch('name')
+  @stylist = Stylist.find(params.fetch('id').to_i())
 
-# View Client
+  @stylist.update({:name => name})
+  erb(:stylist)
+end
+
+# View and Update Client
 get('/clients/:id') do
   @stylists = Stylist.all()
   @client = Client.find(params.fetch('id').to_i())
   erb(:client)
 end
 
-# Update Client
 patch('/clients/:id') do
   @stylists = Stylist.all()
   name = params.fetch('name')
