@@ -6,7 +6,7 @@
 
 ## Description
 
-_Using this app, salon owners can:_
+_Using this app, Salon Owners can:_
 * _View, add, update and delete Stylists,_
 * _View, add, update and delete Clients and_
 * _Add Clients to a Stylist._
