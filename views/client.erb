@@ -2,6 +2,7 @@
 
 <h2>Current Stylist is <a href="/stylists/<%= @client.stylist().id() %>"><%= @client.stylist().name() %></a></h2>
 
+<!-- UPDATE -->
 <br>
 <label for="update-client-form">Update Client Details</label>
 <form class="update-client-form" id="update-client-form" action="/clients/<%= @client.id() %>" method="post">

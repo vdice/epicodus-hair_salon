@@ -63,6 +63,7 @@ end
 
 # View Stylist
 get('/stylists/:id') do
+  @clients = Client.all()
   @stylist = Stylist.find(params.fetch('id').to_i())
   erb(:stylist)
 end
