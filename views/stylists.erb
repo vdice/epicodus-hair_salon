@@ -1,5 +1,6 @@
 <h2>Manage Stylists</h2>
 
+<!-- READ -->
 <% if @stylists.any?() %>
   <ul>
     <% @stylists.each() do |stylist| %>
@@ -12,6 +13,7 @@
   </p>
 <% end %>
 
+<!-- CREATE -->
 <br>
 <label for="add-stylist-form">Add a Stylist</label>
 <form class="add-stylist-form" id="add-stylist-form" action="/stylists" method="post">
@@ -22,6 +24,7 @@
   <button type="submit" class="btn btn-primary">Add Stylist</button>
 </form>
 
+<!-- DELETE -->
 <% if @stylists.any?() %>
 <label for="remove-stylist-form">Remove a Stylist</label>
   <form class="remove-stylist-form" id="remove-stylist-form" action="/stylists" method="post">

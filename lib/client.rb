@@ -24,6 +24,14 @@ class Client
     clients
   end
 
+  define_singleton_method(:find) do |id|
+    Client.all().each() do |client|
+      if client.id().eql?(id)
+        return client
+      end
+    end
+  end
+
   define_method(:==) do |other|
     @id.eql?(other.id())
   end

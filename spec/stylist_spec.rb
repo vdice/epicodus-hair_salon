@@ -18,15 +18,15 @@ describe(Stylist) do
     end
   end
 
-  describe('.find') do
-    it('returns the stylist based on id') do
-      expect(Stylist.find(@stylist.id())).to(eq(@stylist))
-    end
-  end
-
   describe('.all') do
     it('returns all stylists') do
       expect(Stylist.all()).to(eq([@stylist]))
+    end
+  end
+
+  describe('.find') do
+    it('returns the stylist based on id') do
+      expect(Stylist.find(@stylist.id())).to(eq(@stylist))
     end
   end
 

@@ -30,6 +30,12 @@ describe(Client) do
     end
   end
 
+  describe('.find') do
+    it('returns the client based on id') do
+      expect(Client.find(@client.id())).to(eq(@client))
+    end
+  end
+
   describe('#update') do
     before(:each) do
       @alternate_stylist.save()

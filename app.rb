@@ -11,6 +11,7 @@ get('/') do
   erb(:index)
 end
 
+# Read, Create and Delete Stylists
 get('/stylists') do
   @stylists = Stylist.all()
   erb(:stylists)
@@ -32,6 +33,7 @@ delete('/stylists') do
   erb(:stylists)
 end
 
+# Read, Create and Delete Clients
 get('/clients') do
   @stylists = Stylist.all()
   @clients = Client.all()
@@ -49,7 +51,18 @@ post('/clients') do
   erb(:clients)
 end
 
+delete('/clients') do
+  Client.find(params.fetch('client_select').to_i()).delete()
+
+  @stylists = Stylist.all()
+  @clients = Client.all()
+  erb(:clients)
+end
+
+# Update Stylists
 get('/stylists/:id') do
   @stylist = Stylist.find(params.fetch('id').to_i())
   erb(:stylist)
 end
+
+# Update Clients
