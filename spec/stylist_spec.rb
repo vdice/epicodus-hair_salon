@@ -31,9 +31,25 @@ describe(Stylist) do
   end
 
   describe('#update') do
-    it('updates stylist name') do
+    before(:each) do
+      @alternate_stylist.save()
+      @alternate_client.save()
+    end
+
+    it('updates stylist particulars') do
+      @stylist.update({:name => @alternate_stylist.name(), :client_ids => [@client.id()]})
+      expect(@stylist.name()).to(eq(@alternate_stylist.name()))
+      expect(@stylist.clients()).to(eq([@client]))
+    end
+    it('updates stylist name only') do
       @stylist.update({:name => @alternate_stylist.name()})
       expect(@stylist.name()).to(eq(@alternate_stylist.name()))
+      expect(@stylist.clients()).to(eq([@client]))
+    end
+    it('updates stylist clients only') do
+      @stylist.update({:client_ids => [@client.id(), @alternate_client.id()]})
+      expect(@stylist.name()).to(eq(@stylist.name()))
+      expect(@stylist.clients()).to(eq([@client, @alternate_client]))
     end
   end
 

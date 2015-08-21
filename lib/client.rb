@@ -31,7 +31,7 @@ class Client
   define_method(:update) do |new_attributes|
     @name = new_attributes.fetch(:name, @name)
     @stylist = new_attributes.fetch(:stylist, @stylist)
-    DB.exec("UPDATE clients SET name = '#{@name}', stylist_id = #{@stylist.id()} WHERE id = #{@id}")
+    DB.exec("UPDATE clients SET name = '#{@name}', stylist_id = #{@stylist.id()} WHERE id = #{@id};")
   end
 
   define_method(:delete) do

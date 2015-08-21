@@ -31,7 +31,7 @@ describe(Client) do
   end
 
   describe('#update') do
-    before() do
+    before(:each) do
       @alternate_stylist.save()
     end
 
