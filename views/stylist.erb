@@ -2,7 +2,14 @@
 
 <!-- Client listing -->
 <% if @stylist.clients().any?() %>
-
+<h3>Your Current List of Clients:</h3>
+<div id="client_listing">
+  <ul>
+    <% @stylist.clients().each() do |client| %>
+      <li><a href="/clients/<%= client.id() %>"><%= client.name() %></a></li>
+    <% end %>
+  </ul>
+</div>
 <% else %>
 <p>
   You have no clients!
@@ -11,20 +18,25 @@
 
 <!-- UPDATE -->
 <br>
-<label for="update-stylist-form">Update Stylist Details</label>
+<h3>Update Stylist Details</h3>
 <form class="update-stylist-form" id="update-stylist-form" action="/stylists/<%= @stylist.id() %>" method="post">
 <input type="hidden" name="_method" value="patch">
   <div class="form-group">
     <label for="name">Stylist Name</label>
     <input type="text" name="name" id="name" class="form-control" value="<%= @stylist.name() %>">
 
-<!-- Client Selection -->
-    <!-- <label for="stylist_select">Client</label>
-    <select id="stylist_select" name="stylist_select" type="text" class="form-control">
-      <% @clients.each() do |client| %>
-        <option value="<%= client.id() %>"><%= client.name() %></option>
-      <% end %>
-    </select> -->
+    <% if @clients.any?() %>
+    <br>
+      <label for="client-checkbox-listing">Clients to Add</label>
+        <% @clients.each() do |client| %>
+          <div class="checkbox" id="client-checkbox-listing">
+            <label>
+              <!-- TODO: pre-check clients already assigned to this stylist -->
+              <input type="checkbox" id="client_<%= client.name().gsub(/\s+/, "") %>" name="client_ids[]" value="<%= client.id() %>"><%= client.name() %>
+            </label>
+          </div>
+        <% end %>
+    <% end %>
   </div>
   <button type="submit" class="btn btn-primary">Update</button>
 </form>

@@ -63,33 +63,36 @@ end
 
 # View and Update Stylist
 get('/stylists/:id') do
-  @clients = Client.all()
   @stylist = Stylist.find(params.fetch('id').to_i())
+  @clients = Client.all()
   erb(:stylist)
 end
 
 patch('/stylists/:id') do
-  @clients = Client.all()
   name = params.fetch('name')
   @stylist = Stylist.find(params.fetch('id').to_i())
 
-  @stylist.update({:name => name})
+  client_ids = params.fetch('client_ids', [])
+  @stylist.update({:name => name, :client_ids => client_ids})
+
+  @clients = Client.all()
   erb(:stylist)
 end
 
 # View and Update Client
 get('/clients/:id') do
-  @stylists = Stylist.all()
   @client = Client.find(params.fetch('id').to_i())
+  @stylists = Stylist.all()
   erb(:client)
 end
 
 patch('/clients/:id') do
-  @stylists = Stylist.all()
   name = params.fetch('name')
-  stylist = Stylist.find(params.fetch('stylist_select').to_i())
-
   @client = Client.find(params.fetch('id').to_i())
+
+  stylist = Stylist.find(params.fetch('stylist_select').to_i())
   @client.update({:name => name, :stylist => stylist})
+
+  @stylists = Stylist.all()
   erb(:client)
 end

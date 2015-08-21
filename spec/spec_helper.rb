@@ -20,6 +20,6 @@ RSpec.configure do |config|
     @client = Client.new({:name => 'Bucephalus', :stylist => @stylist, :id => nil})
 
     @alternate_stylist = Stylist.new({:name => 'Philonicus the Thessalian', :id => nil})
-    @alternate_client = Client.new({:name => 'Buce', :stylist => @alternate_stylist, :id => nil})
+    @alternate_client = Client.new({:name => 'Hippalektryon', :stylist => @alternate_stylist, :id => nil})
   end
 end
