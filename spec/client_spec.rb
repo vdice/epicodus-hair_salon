@@ -24,4 +24,26 @@ describe(Client) do
       expect(Client.all()).to(eq([@client]))
     end
   end
+
+  describe('#update') do
+    it('updates client particulars') do
+      alternate_stylist = Stylist.new({:name => 'Philonicus the Thessalian', :id => nil})
+      alternate_stylist.save()
+      @client.update({:name => 'Buce', :stylist => alternate_stylist})
+      expect(@client.name()).to(eq('Buce'))
+      expect(@client.stylist()).to(eq(alternate_stylist))
+    end
+    it('updates client name only') do
+      @client.update({:name => 'Buce'})
+      expect(@client.name()).to(eq('Buce'))
+      expect(@client.stylist()).to(eq(@stylist))
+    end
+    it('updates client stylist only') do
+      alternate_stylist = Stylist.new({:name => 'Philonicus the Thessalian', :id => nil})
+      alternate_stylist.save()
+      @client.update({:stylist => alternate_stylist})
+      expect(@client.name()).to(eq(@client.name()))
+      expect(@client.stylist()).to(eq(alternate_stylist))
+    end
+  end
 end
