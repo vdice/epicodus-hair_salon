@@ -26,7 +26,7 @@ CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);
 
 ## Technologies Used
 
-_Ruby, rspec, Sinatra, Capybara, Heroku, Postgres_
+_Ruby, rspec, Sinatra, Capybara, Postgres_
 
 ### Legal
 
