@@ -70,6 +70,12 @@ describe('The Hair Salon Management App', {:type => :feature}) do
         expect(page).to have_content(@client.name())
         expect(page).to have_content(@stylist.name())
       end
+      it('presents the user with a listing of all clients, even if there are no stylists') do
+        @stylist.delete()
+        visit('/clients')
+        expect(page).to have_content(@client.name())
+        expect(page).to_not have_content(@stylist.name())
+      end
       it('allows the user to add a new client') do
         fill_in('name', :with => 'Balios')
         find('#stylist_select').find(:xpath, 'option[1]').select_option
@@ -96,9 +102,15 @@ describe('The Hair Salon Management App', {:type => :feature}) do
       before(:each) do
         visit("/clients/#{@client.id()}")
       end
-      it('greets the user with initial details') do
+      it('greets the user with initial details if a stylist exists') do
         expect(page).to have_content("Manage details for #{@client.name()}")
         expect(page).to have_content("Current Stylist is #{@client.stylist().name()}")
+      end
+      it('greets the user with initial details if a stylist does not exist') do
+        @stylist.delete()
+        visit("/clients/#{@client.id()}")
+        expect(page).to have_content("Manage details for #{@client.name()}")
+        expect(page).to_not have_content("Current Stylist is #{@client.stylist().name()}")
       end
       it('allows the user to return to clients page') do
         click_link('Back')
